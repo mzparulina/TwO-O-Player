@@ -12,16 +12,30 @@ class Game
     current_player = rand(1..2)
 
     puts "--- Game Start ---"
-    puts "--- Choosing Player ---"
+    puts "--- Choosing Player To Answer ---"
     puts "--- PLAYER #{current_player} Selected"
 
-     ##----------- state of while loop ----------------
+     ##----------- start of while loop ----------------
     while (p1.lives && p2.lives) > 0 do
       @question = Questions.new
-
-      puts "Player #{current_player}: #{@question.create_question}"
+      if(current_player === 1)
+        puts "Player 2: #{@question.create_question}"
+      else
+        puts "Player 1: #{@question.create_question}"
+      end
       answer = gets.chomp
 
+      if @question.check_answer(answer)   == false
+        if(current_player === 1)
+          p2.deduct_life
+          puts "Wrong answer Player 1!"
+        else
+          p1.deduct_life
+          puts "Wrong answer Player 2!"
+        end
+      else
+        puts "Correct! Switch Players."
+      end
     end
   
     ##----------- end of while loop ----------------
