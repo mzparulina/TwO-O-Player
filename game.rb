@@ -10,7 +10,6 @@ class Game
     p2 = Players.new("Player 2")
     
     current_player = rand(1..2)
-
     puts "--- Game Start ---"
     puts "--- Choosing Player To Answer ---"
     puts "--- PLAYER #{current_player} Selected"
@@ -25,22 +24,25 @@ class Game
       end
       answer = gets.chomp
 
-      if @question.check_answer(answer)   == false
+      if @question.check_answer(answer) == false
         if(current_player === 1)
-          p2.deduct_life
+          p1.deduct_life
           puts "Wrong answer Player 1!"
         else
-          p1.deduct_life
+          p2.deduct_life
           puts "Wrong answer Player 2!"
         end
-      else
-        puts "Correct! Switch Players."
       end
+
+      puts "P1: #{p1.lives} / 3 vs P2: #{p2.lives} / 3"
+
+      current_player = current_player === 1 ? 2 : 1
     end
   
     ##----------- end of while loop ----------------
     
     puts "--- GAME OVER ---"
+    puts "--- Good bye! ---"
   end
   
 end
