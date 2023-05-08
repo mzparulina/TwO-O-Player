@@ -6,8 +6,15 @@ class Questions
     @answer = @num1 + @num2
   end
 
-  def show_question
+  def create_question
     puts "What does #{@num1} plus #{@num2} equal?"
   end
 
+  def check_answer(answer)
+    if @answer == answer.to_i ## convert the answer to string
+      return true
+    else
+      return false
+    end
+  end
 end
